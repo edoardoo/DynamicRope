@@ -1,7 +1,7 @@
 ropeDemo.rope = {
 	items: [],
 	nbItems: 20,
-	length: +50,
+	length: +300,
 	relaxationIterations: +10,
 	coeff:+1,
 	state: false,
@@ -38,32 +38,12 @@ ropeDemo.DrawOverride = function () {
 				var item0 = ropeDemo.rope.items[index-18];
 				ropeDemo.rope.coeff = ((item.x + ropeDemo.context.center.x)- (item0.x + ropeDemo.context.center.x))/((item.y + ropeDemo.context.center.y)-(item0.y + ropeDemo.context.center.y));
 
-				//future grabbing implementation:
-				// if(ropeDemo.rope.coeff > 1.5){
+				
 
-				// 	ropeDemo.rope.coeff = 1.5;
-				// }else if(ropeDemo.rope.coeff < -1.5){
-				// 	ropeDemo.rope.coeff = -1.5;
-				// }
-				// if(Math.abs(ropeDemo.rope.oldCoeff-ropeDemo.rope.coeff) > 0.5 ){
-				// 	delta = -0.5;
-				// 	if(ropeDemo.rope.coeff<0){
-				// 		delta = 0.5;
-				// 	}
-				// 	ropeDemo.rope.coeff = ropeDemo.rope.oldCoeff + delta; 
-				// }
-				// ropeDemo.rope.oldCoeff = ropeDemo.rope.coeff;
-
-				console.log(ropeDemo.rope.coeff );
 				ropeDemo.context.drawingContext.save();
 				ropeDemo.context.drawingContext.translate((item.x + ropeDemo.context.center.x), (item.y + ropeDemo.context.center.y));
 				ropeDemo.context.drawingContext.rotate(ropeDemo.rope.coeff);
-				
-				//the light
-				
 			
-				ropeDemo.context.drawingContext.drawImage(ropeDemo.context.img0,-150,-10); 
-				
 
 				ropeDemo.context.drawingContext.restore();
 				
@@ -133,106 +113,9 @@ ropeDemo.ThinkOverride = function () {
 		}
 	}
 };
-ropeDemo.playLight = function(){
-				ropeDemo.song = document.getElementById('neonSound');
-
-				ropeDemo.song.currentTime = 0;
-				ropeDemo.song.play();
-
-}
-ropeDemo.playCreak = function(){
-				ropeDemo.creak = document.getElementById('creakSound');
-
-				ropeDemo.creak.play();
-
-}
-
-ropeDemo.waitLight = function(){
-				// document.body.style.background="#ddd";
-				ropeDemo.playLight();
-				setTimeout(function(){ropeDemo.Light(); }, 400);
-				setTimeout(function(){ropeDemo.noLight()},450);
-
-				setTimeout(function(){ropeDemo.Light()}, 600);
-				setTimeout(function(){ropeDemo.noLight()}, 700);
-
-				setTimeout(function(){ropeDemo.Light()}, 1100);
-			$('.dustCloser').css({'opacity':'1'}).addClass('dustCloserAnimated');
-			$('.dustFar').css({'opacity':'1'}).addClass('dustFarAnimated');
-
-}
-ropeDemo.Light = function(){
-				$('.central').css({'opacity':'1'});
-				ropeDemo.data.state = true;
-				ropeDemo.context.drawingContext.beginPath();
-				 
-           		
-
-				var item = ropeDemo.rope.items.slice(-1)[0];
-				var item0 = ropeDemo.rope.items.slice(-9)[0];
-				ropeDemo.rope.coeff = ((item.x + ropeDemo.context.center.x)- (item0.x + ropeDemo.context.center.x))/((item.y + ropeDemo.context.center.y)-(item0.y + ropeDemo.context.center.y));
-				ropeDemo.context.drawingContext.save();
-				ropeDemo.context.drawingContext.translate((item.x + ropeDemo.context.center.x), (item.y + ropeDemo.context.center.y));
-				ropeDemo.context.drawingContext.rotate(ropeDemo.rope.coeff);
-				
-				//the light
-				
-				ropeDemo.context.drawingContext.moveTo(item.x, item.y+170);
-				ropeDemo.context.drawingContext.lineTo(3900, 1280);
-				ropeDemo.context.drawingContext.lineTo(-3900,1280);
-				ropeDemo.context.drawingContext.lineTo(item.x, item.y+170);
-				var grd = ropeDemo.context.drawingContext.createRadialGradient(0, 0, 2, 640, 1030, 1280);
-				
-				grd.addColorStop(0, 'white');
-				  // dark blue
-				grd.addColorStop(1, 'rgba(255, 255, 255, 0.6)');
-
-				// ropeDemo.context.drawingContext.fillStyle = 'rgba(255, 255, 209, 0.9)';
-				ropeDemo.context.drawingContext.fillStyle = grd;
-				ropeDemo.context.drawingContext.fill();
-
-				ropeDemo.context.drawingContext.drawImage(ropeDemo.context.img1,-150,-10); 
-				
-
-				ropeDemo.context.drawingContext.restore();
-				ropeDemo.context.drawingContext.lineWidth = 0;
-				ropeDemo.context.drawingContext.closePath();
-				$('.central2').css({'display':'block'});
-}
-
-ropeDemo.noLight = function(){
-
-				ropeDemo.data.state = false;
-				$('.central').css({'opacity':'0'});
 
 
-				ropeDemo.context.drawingContext.clearRect(0, 60, ropeDemo.context.size.w, ropeDemo.context.size.h);
 
-				ropeDemo.context.drawingContext.beginPath();
-				var item = ropeDemo.rope.items.slice(-1)[0];
-				var item0 = ropeDemo.rope.items.slice(-9)[0];
-				ropeDemo.rope.coeff = ((item.x + ropeDemo.context.center.x)- (item0.x + ropeDemo.context.center.x))/((item.y + ropeDemo.context.center.y)-(item0.y + ropeDemo.context.center.y));
-				ropeDemo.context.drawingContext.save();
-				ropeDemo.context.drawingContext.translate((item.x + ropeDemo.context.center.x), (item.y + ropeDemo.context.center.y));
-				ropeDemo.context.drawingContext.rotate(ropeDemo.rope.coeff);
-							
-				ropeDemo.context.drawingContext.drawImage(ropeDemo.context.img0,-150,-10); 
-				
-
-				ropeDemo.context.drawingContext.restore();
-				ropeDemo.context.drawingContext.lineWidth = 0;
-				ropeDemo.context.drawingContext.closePath();
-				$('.central2').css({'display':'none'});
-
-
-}
-ropeDemo.turnOff = function(){
-			// document.body.style.background="#FFF";
-			$('.dustCloser').css({'opacity':'0'}).removeClass('dustCloserAnimated');
-			$('.dustFar').css({'opacity':'0'}).removeClass('dustFarAnimated');
-
-			ropeDemo.noLight();
-}
 
 ropeDemo.StartOverride = function () {
 
@@ -267,5 +150,4 @@ ropeDemo.StartOverride = function () {
 
 
 	ropeDemo.rope.items[0].isPinned = true;
-	ropeDemo.playCreak();
 };

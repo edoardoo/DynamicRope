@@ -1,24 +1,24 @@
 <html>
 <head>
-		<title></title>
-		<style type="text/css">
+	<title></title>
+	<style type="text/css">
 
-		body, html{
-			height: 100%;
-			width: 100%;
-			position: relative;
-			margin:0;
-			  -webkit-transition: background 0.5s ease-in-out;  /* Chrome 1-25, Safari 3.2+ */
-	 -moz-transition: background 0.5s ease-in-out;  /* Firefox 4-15 */
-	   -o-transition: background 0.5s ease-in-out;  /* Opera 10.50–12.00 */
-		  transition: background 0.5s ease-in-out;  /* Chrome 26, Firefox 16+, IE 10+, Opera 12.10+ */
-		  text-rendering: optimizeLegibility;
-		  -webkit-font-smoothing: antialiased;
-		  background: #111;
-		  font-family:  Helvetica, Arial, 'Lucida Grande', sans-serif;
+	body, html{
+		height: 100%;
+		width: 100%;
+		position: relative;
+		margin:0;
+		-webkit-transition: background 0.5s ease-in-out;  /* Chrome 1-25, Safari 3.2+ */
+	 	-moz-transition: background 0.5s ease-in-out;  /* Firefox 4-15 */
+	  	-o-transition: background 0.5s ease-in-out;  /* Opera 10.50–12.00 */
+		transition: background 0.5s ease-in-out;  /* Chrome 26, Firefox 16+, IE 10+, Opera 12.10+ */
+		text-rendering: optimizeLegibility;
+		-webkit-font-smoothing: antialiased;
+		background: #EEE;
+		font-family:  Helvetica, Arial, 'Lucida Grande', sans-serif;
 
-		}
-		canvas {
+	}
+	canvas {
 		display: block;
 		width: 100%;
 		min-height: 500px;
@@ -180,73 +180,71 @@
 
 }
 	</style>
+	<link rel="stylesheet" type="text/css" href="css/slider.css">
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+
+
 </head>
 <body>
-	<div class = 'external wide'>Wide</div>
-	<div class = 'external lenotta'>Lenotta</div>
-	<div class = 'external hack'>Hack</div>
-	<div class = 'external lights'>Toggle Lights!</div>
-	<div class = 'central mainText'>
-		<img class='avatar' src="avatar.png" height='100' width='100'>
-		<h1 class = 'title'>Hullo! My name is Edoardo Odorico.</h1>
-		<h1 class = 'subtitle'>I'm a web designer, photographer and videomaker.</h1>
-		<h1 class = 'subtitle'>Watch my blogs on the left, or my works on the top right!</h1>
 
-	</div>
+<!-- 	<canvas id="Light"></canvas>
+ -->
+ 	<!-- <div id = "sliders">
+ 		<div class = 'sliderContainer' >
+	 		<span>Gravity:</span>
+	 		<div class="slider" id="gravity"></div>
+ 		</div>
+		<div class = 'sliderContainer' >
 
-	<div class='dustFrame'>
-		<div class = "dustCloser dust"></div>
-		<div class = "dustFar dust"></div>
-	</div>
-	<canvas id="Light"></canvas>
-	<canvas id="RopeDrawingArea">You need a internet browser that support html5 canvas…</canvas>
+	 		<span>Length:</span>
+	 		<div class="slider" id='length'></div>
+
+ 		</div>
+		<div class = 'sliderContainer' >
+	 		<span>Pixels per meter:</span>
+	 		<div class="slider" id='pixelsPerMeter'></div>
+ 		</div>
+		<div class = 'sliderContainer' >
+	 		<span>Relaxation iterations:</span>
+	 		<div class="slider" id="relaxationIterations"></div>
+		</div>
+		<div class = 'sliderContainer' >
+	 		<span>Coefficient:</span>
+	 		<div class="slider" id='coeff'></div>
+ 		</div>
+		<div class = 'sliderContainer' >
+			<span>Number of dots:</span>
+	 		<div class="slider" id="nbItems"></div>
+ 		</div>
+ 	</div> -->
+ 	<canvas id="RopeDrawingArea">You need a internet browser that support html5 canvas…</canvas>
+	<script type="text/javascript" src="js/bootstrap-slider.js"></script>
 	<script type="text/javascript" src="js/physic.js"></script>
 	<script type="text/javascript" src="js/ropeCore.js"></script>
 	<script type="text/javascript" src="js/ropeImpl.js"></script>
 	<script type="text/javascript" src="js/verletDemoBootStrapper.js"></script>
-	<script type="text/javascript">$
-	var titleShadow = $('.central2');
-	var central = $('.mainText');
-	var winW =  $(window).width();
+	<script type="text/javascript">
+		$(document).ready(function(RopeDemo){
 
-	$('.lights').click(function(){
-			if(	ropeDemo.data.state == true){
-								ropeDemo.turnOff();
-								central.css({'left':'50%'});
+			$('.slider').slider({'min': 0, 'max': 100}).on('slide', function(){
+				selector = $(this).attr('id');
+				if( selector == 'gravity' || selector == 'pixelsPerMeter'){
+					modifiedObject = ropeDemo.data;
+				}else{
+					modifiedObject = ropeDemo.rope;
+				}
+				modifiedObject[selector] = this.slider('getValue');
+				console.dir($(this));
+			
 
-			}else{
-				ropeDemo.waitLight();
-			}
-	});
 
-	
 
-		$("body").mousemove(function(e) {
-			// if(	ropeDemo.data.state == true){
-			// 	var degree = -((e.pageX-(winW/2))*65)/(winW/2);
+			});
 
-			// 	titleShadow.css({'transform': 'skew('+(-degree)+'deg,0deg) scaleY(.2)'});
-			// 	titleShadow.css({'left':(winW/2)+(degree*1.2)});
 
-			// 	// central.css({'left':winW/2+(degree*0.2)});
-			// }
-		})
+		});
+
 	</script>
-	<audio preload="auto" controls id="neonSound" class="resources">
-		<source src="neon.mp3" type="audio/mpeg">
-		<source src="neon.ogg" type="audio/ogg">
-
-	Your browser does not support the audio element.
-	</audio>
-	<audio preload="auto" controls id="creakSound" class="resources">
-		<source src="creak0.mp3" type="audio/mpeg">
-		<source src="creak0.ogg" type="audio/ogg">
-
-	Your browser does not support the audio element.
-	</audio>
-	<img class = "resources" id = 'lampOff'src="lamp0.png" width='0' height='0'>
-	<img class = "resources" id = 'lampOn' src="lamp1.png" width='0' height='0'>
-
+	
 </body>
 </html>
