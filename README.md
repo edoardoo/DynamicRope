@@ -1,0 +1,4 @@
+DynamiRope
+==========
+
+Dynamic rope simulation
