@@ -1,7 +1,5 @@
-FallingLamp
+Dynamic Rope
 ===========
 
-This is a little project about a falling industrial lamp in a browser. 
-It falls down oscillating, then when stopped turn on the ligths.
+This is a little project about a dynamic rope and its physics.
 
-More informations are avilable on http://hack.lenotta.com
